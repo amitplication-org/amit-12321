@@ -19,6 +19,7 @@ import {
 } from "class-validator";
 import { OrderUpdateManyWithoutProductsInput } from "./OrderUpdateManyWithoutProductsInput";
 import { Type } from "class-transformer";
+
 @InputType()
 class ProductUpdateInput {
   @ApiProperty({
@@ -30,7 +31,7 @@ class ProductUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  description?: string | null;
+  name?: string | null;
 
   @ApiProperty({
     required: false,
@@ -52,7 +53,7 @@ class ProductUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  name?: string | null;
+  description?: string | null;
 
   @ApiProperty({
     required: false,
@@ -66,4 +67,5 @@ class ProductUpdateInput {
   })
   orders?: OrderUpdateManyWithoutProductsInput;
 }
+
 export { ProductUpdateInput };
