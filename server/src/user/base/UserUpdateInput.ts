@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, IsJSON } from "class-validator";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+
 @InputType()
 class UserUpdateInput {
   @ApiProperty({
@@ -47,6 +48,17 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
+  username?: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
   password?: string;
 
   @ApiProperty({
@@ -58,16 +70,6 @@ class UserUpdateInput {
     nullable: true,
   })
   roles?: InputJsonValue;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  username?: string;
 }
+
 export { UserUpdateInput };
