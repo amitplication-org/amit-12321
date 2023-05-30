@@ -4,26 +4,25 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  ReferenceInput,
-  SelectInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  ReferenceInput,
+  SelectInput,
+  BooleanInput,
 } from "react-admin";
 
-import { AddressTitle } from "../address/AddressTitle";
 import { OrderTitle } from "../order/OrderTitle";
+import { AddressTitle } from "../address/AddressTitle";
 
 export const CustomerEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceInput source="address.id" reference="Address" label="Address">
-          <SelectInput optionText={AddressTitle} />
-        </ReferenceInput>
-        <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
+        <TextInput label="Email" source="email" type="email" />
+        <TextInput label="Phone" source="phone" />
         <ReferenceArrayInput
           source="orders"
           reference="Order"
@@ -32,7 +31,10 @@ export const CustomerEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={OrderTitle} />
         </ReferenceArrayInput>
-        <TextInput label="Phone" source="phone" />
+        <ReferenceInput source="address.id" reference="Address" label="Address">
+          <SelectInput optionText={AddressTitle} />
+        </ReferenceInput>
+        <BooleanInput label="isPremium" source="isPremium" />
       </SimpleForm>
     </Edit>
   );
