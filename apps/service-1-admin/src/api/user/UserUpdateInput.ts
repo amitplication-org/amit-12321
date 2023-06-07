@@ -5,5 +5,7 @@ export type UserUpdateInput = {
   lastName?: string | null;
   password?: string;
   roles?: InputJsonValue;
+  serialNumber?: string | null;
+  someField?: string | null;
   username?: string;
 };

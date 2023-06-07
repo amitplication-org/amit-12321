@@ -6,6 +6,8 @@ export type User = {
   id: string;
   lastName: string | null;
   roles: JsonValue;
+  serialNumber: string | null;
+  someField: string | null;
   updatedAt: Date;
   username: string;
 };

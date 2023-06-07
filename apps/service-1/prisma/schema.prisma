@@ -8,12 +8,20 @@ generator client {
 }
 
 model User {
+  createdAt    DateTime @default(now())
+  firstName    String?
+  id           String   @id @default(cuid())
+  lastName     String?
+  password     String
+  roles        Json
+  serialNumber String?
+  someField    String?
+  updatedAt    DateTime @updatedAt
+  username     String   @unique
+}
+
+model NewEntity {
   createdAt DateTime @default(now())
-  firstName String?
   id        String   @id @default(cuid())
-  lastName  String?
-  password  String
-  roles     Json
   updatedAt DateTime @updatedAt
-  username  String   @unique
 }
