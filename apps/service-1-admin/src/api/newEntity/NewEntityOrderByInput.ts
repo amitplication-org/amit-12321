@@ -4,4 +4,5 @@ export type NewEntityOrderByInput = {
   createdAt?: SortOrder;
   id?: SortOrder;
   updatedAt?: SortOrder;
+  usersId?: SortOrder;
 };

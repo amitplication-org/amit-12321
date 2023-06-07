@@ -48,11 +48,25 @@ export class NewEntityControllerBase {
   })
   async create(@common.Body() data: NewEntityCreateInput): Promise<NewEntity> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        users: data.users
+          ? {
+              connect: data.users,
+            }
+          : undefined,
+      },
       select: {
         createdAt: true,
         id: true,
         updatedAt: true,
+
+        users: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -77,6 +91,12 @@ export class NewEntityControllerBase {
         createdAt: true,
         id: true,
         updatedAt: true,
+
+        users: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -102,6 +122,12 @@ export class NewEntityControllerBase {
         createdAt: true,
         id: true,
         updatedAt: true,
+
+        users: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -131,11 +157,25 @@ export class NewEntityControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          users: data.users
+            ? {
+                connect: data.users,
+              }
+            : undefined,
+        },
         select: {
           createdAt: true,
           id: true,
           updatedAt: true,
+
+          users: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -169,6 +209,12 @@ export class NewEntityControllerBase {
           createdAt: true,
           id: true,
           updatedAt: true,
+
+          users: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {

@@ -27,6 +27,9 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
+import { NewEntityFindManyArgs } from "../../newEntity/base/NewEntityFindManyArgs";
+import { NewEntity } from "../../newEntity/base/NewEntity";
+import { NewEntityWhereUniqueInput } from "../../newEntity/base/NewEntityWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -209,5 +212,106 @@ export class UserControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/newEntity")
+  @ApiNestedQuery(NewEntityFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "NewEntity",
+    action: "read",
+    possession: "any",
+  })
+  async findManyNewEntity(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<NewEntity[]> {
+    const query = plainToClass(NewEntityFindManyArgs, request.query);
+    const results = await this.service.findNewEntity(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+
+        users: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/newEntity")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectNewEntity(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: NewEntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      newEntity: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/newEntity")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateNewEntity(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: NewEntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      newEntity: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/newEntity")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectNewEntity(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: NewEntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      newEntity: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

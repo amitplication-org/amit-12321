@@ -18,10 +18,14 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { CreateNewEntityArgs } from "./CreateNewEntityArgs";
+import { UpdateNewEntityArgs } from "./UpdateNewEntityArgs";
 import { DeleteNewEntityArgs } from "./DeleteNewEntityArgs";
 import { NewEntityFindManyArgs } from "./NewEntityFindManyArgs";
 import { NewEntityFindUniqueArgs } from "./NewEntityFindUniqueArgs";
 import { NewEntity } from "./NewEntity";
+import { User } from "../../user/base/User";
 import { NewEntityService } from "../newEntity.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => NewEntity)
@@ -80,6 +84,63 @@ export class NewEntityResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => NewEntity)
+  @nestAccessControl.UseRoles({
+    resource: "NewEntity",
+    action: "create",
+    possession: "any",
+  })
+  async createNewEntity(
+    @graphql.Args() args: CreateNewEntityArgs
+  ): Promise<NewEntity> {
+    return await this.service.create({
+      ...args,
+      data: {
+        ...args.data,
+
+        users: args.data.users
+          ? {
+              connect: args.data.users,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => NewEntity)
+  @nestAccessControl.UseRoles({
+    resource: "NewEntity",
+    action: "update",
+    possession: "any",
+  })
+  async updateNewEntity(
+    @graphql.Args() args: UpdateNewEntityArgs
+  ): Promise<NewEntity | null> {
+    try {
+      return await this.service.update({
+        ...args,
+        data: {
+          ...args.data,
+
+          users: args.data.users
+            ? {
+                connect: args.data.users,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new apollo.ApolloError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => NewEntity)
   @nestAccessControl.UseRoles({
     resource: "NewEntity",
@@ -99,5 +160,26 @@ export class NewEntityResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, {
+    nullable: true,
+    name: "users",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldUsers(
+    @graphql.Parent() parent: NewEntity
+  ): Promise<User | null> {
+    const result = await this.service.getUsers(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }
