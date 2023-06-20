@@ -237,6 +237,13 @@ export class AddressControllerBase {
         id: true,
         lastName: true,
         phone: true,
+
+        someThing: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
