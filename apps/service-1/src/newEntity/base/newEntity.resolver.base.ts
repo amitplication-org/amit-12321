@@ -22,6 +22,7 @@ import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateReq
 import { CreateNewEntityArgs } from "./CreateNewEntityArgs";
 import { UpdateNewEntityArgs } from "./UpdateNewEntityArgs";
 import { DeleteNewEntityArgs } from "./DeleteNewEntityArgs";
+import { NewEntityCountArgs } from "./NewEntityCountArgs";
 import { NewEntityFindManyArgs } from "./NewEntityFindManyArgs";
 import { NewEntityFindUniqueArgs } from "./NewEntityFindUniqueArgs";
 import { NewEntity } from "./NewEntity";
@@ -42,15 +43,11 @@ export class NewEntityResolverBase {
     possession: "any",
   })
   async _newEntitiesMeta(
-    @graphql.Args() args: NewEntityFindManyArgs
+    @graphql.Args() args: NewEntityCountArgs
   ): Promise<MetaQueryPayload> {
-    const results = await this.service.count({
-      ...args,
-      skip: undefined,
-      take: undefined,
-    });
+    const result = await this.service.count(args);
     return {
-      count: results,
+      count: result,
     };
   }
 

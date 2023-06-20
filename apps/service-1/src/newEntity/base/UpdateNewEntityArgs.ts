@@ -10,13 +10,29 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { ArgsType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
 import { NewEntityWhereUniqueInput } from "./NewEntityWhereUniqueInput";
+import { ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
 import { NewEntityUpdateInput } from "./NewEntityUpdateInput";
 
 @ArgsType()
 class UpdateNewEntityArgs {
+  @ApiProperty({
+    required: true,
+    type: () => NewEntityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => NewEntityWhereUniqueInput)
   @Field(() => NewEntityWhereUniqueInput, { nullable: false })
   where!: NewEntityWhereUniqueInput;
+
+  @ApiProperty({
+    required: true,
+    type: () => NewEntityUpdateInput,
+  })
+  @ValidateNested()
+  @Type(() => NewEntityUpdateInput)
   @Field(() => NewEntityUpdateInput, { nullable: false })
   data!: NewEntityUpdateInput;
 }

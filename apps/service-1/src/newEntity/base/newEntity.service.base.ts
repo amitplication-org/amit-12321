@@ -15,8 +15,8 @@ import { Prisma, NewEntity, User } from "@prisma/client";
 export class NewEntityServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
-  async count<T extends Prisma.NewEntityFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.NewEntityFindManyArgs>
+  async count<T extends Prisma.NewEntityCountArgs>(
+    args: Prisma.SelectSubset<T, Prisma.NewEntityCountArgs>
   ): Promise<number> {
     return this.prisma.newEntity.count(args);
   }

@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { NewEntityWhereInput } from "./NewEntityWhereInput";
+import { IsOptional, ValidateNested, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { NewEntityOrderByInput } from "./NewEntityOrderByInput";
 
@@ -21,6 +22,8 @@ class NewEntityFindManyArgs {
     required: false,
     type: () => NewEntityWhereInput,
   })
+  @IsOptional()
+  @ValidateNested()
   @Field(() => NewEntityWhereInput, { nullable: true })
   @Type(() => NewEntityWhereInput)
   where?: NewEntityWhereInput;
@@ -29,6 +32,8 @@ class NewEntityFindManyArgs {
     required: false,
     type: [NewEntityOrderByInput],
   })
+  @IsOptional()
+  @ValidateNested({ each: true })
   @Field(() => [NewEntityOrderByInput], { nullable: true })
   @Type(() => NewEntityOrderByInput)
   orderBy?: Array<NewEntityOrderByInput>;
@@ -37,6 +42,8 @@ class NewEntityFindManyArgs {
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @IsInt()
   @Field(() => Number, { nullable: true })
   @Type(() => Number)
   skip?: number;
@@ -45,6 +52,8 @@ class NewEntityFindManyArgs {
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @IsInt()
   @Field(() => Number, { nullable: true })
   @Type(() => Number)
   take?: number;
