@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { SomeThingWhereUniqueInput } from "../../someThing/base/SomeThingWhereUniqueInput";
 
 @InputType()
 class CustomerWhereInput {
@@ -98,6 +99,18 @@ class CustomerWhereInput {
     nullable: true,
   })
   phone?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => SomeThingWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => SomeThingWhereUniqueInput)
+  @IsOptional()
+  @Field(() => SomeThingWhereUniqueInput, {
+    nullable: true,
+  })
+  someThing?: SomeThingWhereUniqueInput;
 }
 
 export { CustomerWhereInput as CustomerWhereInput };

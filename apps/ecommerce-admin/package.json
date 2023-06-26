@@ -1,5 +1,5 @@
 {
-  "name": "@ecommerce/admin",
+  "name": "@ecommerce-1/admin",
   "private": true,
   "dependencies": {
     "@apollo/client": "3.6.9",

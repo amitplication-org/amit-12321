@@ -15,6 +15,7 @@ import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueIn
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { OrderCreateNestedManyWithoutCustomersInput } from "./OrderCreateNestedManyWithoutCustomersInput";
+import { SomeThingWhereUniqueInput } from "../../someThing/base/SomeThingWhereUniqueInput";
 
 @InputType()
 class CustomerCreateInput {
@@ -85,6 +86,18 @@ class CustomerCreateInput {
     nullable: true,
   })
   phone?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => SomeThingWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => SomeThingWhereUniqueInput)
+  @IsOptional()
+  @Field(() => SomeThingWhereUniqueInput, {
+    nullable: true,
+  })
+  someThing?: SomeThingWhereUniqueInput | null;
 }
 
 export { CustomerCreateInput as CustomerCreateInput };
