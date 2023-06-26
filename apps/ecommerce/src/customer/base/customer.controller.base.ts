@@ -59,12 +59,6 @@ export class CustomerControllerBase {
               connect: data.address,
             }
           : undefined,
-
-        someThing: data.someThing
-          ? {
-              connect: data.someThing,
-            }
-          : undefined,
       },
       select: {
         address: {
@@ -79,13 +73,6 @@ export class CustomerControllerBase {
         id: true,
         lastName: true,
         phone: true,
-
-        someThing: {
-          select: {
-            id: true,
-          },
-        },
-
         updatedAt: true,
       },
     });
@@ -120,13 +107,6 @@ export class CustomerControllerBase {
         id: true,
         lastName: true,
         phone: true,
-
-        someThing: {
-          select: {
-            id: true,
-          },
-        },
-
         updatedAt: true,
       },
     });
@@ -162,13 +142,6 @@ export class CustomerControllerBase {
         id: true,
         lastName: true,
         phone: true,
-
-        someThing: {
-          select: {
-            id: true,
-          },
-        },
-
         updatedAt: true,
       },
     });
@@ -207,12 +180,6 @@ export class CustomerControllerBase {
                 connect: data.address,
               }
             : undefined,
-
-          someThing: data.someThing
-            ? {
-                connect: data.someThing,
-              }
-            : undefined,
         },
         select: {
           address: {
@@ -227,13 +194,6 @@ export class CustomerControllerBase {
           id: true,
           lastName: true,
           phone: true,
-
-          someThing: {
-            select: {
-              id: true,
-            },
-          },
-
           updatedAt: true,
         },
       });
@@ -277,13 +237,6 @@ export class CustomerControllerBase {
           id: true,
           lastName: true,
           phone: true,
-
-          someThing: {
-            select: {
-              id: true,
-            },
-          },
-
           updatedAt: true,
         },
       });

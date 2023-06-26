@@ -8,6 +8,5 @@ export type CustomerOrderByInput = {
   id?: SortOrder;
   lastName?: SortOrder;
   phone?: SortOrder;
-  someThingId?: SortOrder;
   updatedAt?: SortOrder;
 };

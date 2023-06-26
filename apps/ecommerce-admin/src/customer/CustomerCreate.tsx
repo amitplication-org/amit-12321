@@ -13,7 +13,6 @@ import {
 
 import { AddressTitle } from "../address/AddressTitle";
 import { OrderTitle } from "../order/OrderTitle";
-import { SomeThingTitle } from "../someThing/SomeThingTitle";
 
 export const CustomerCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -34,13 +33,6 @@ export const CustomerCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={OrderTitle} />
         </ReferenceArrayInput>
         <TextInput label="Phone" source="phone" />
-        <ReferenceInput
-          source="someThing.id"
-          reference="SomeThing"
-          label="SomeThing"
-        >
-          <SelectInput optionText={SomeThingTitle} />
-        </ReferenceInput>
       </SimpleForm>
     </Create>
   );
