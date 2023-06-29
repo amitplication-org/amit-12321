@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "nestjs-prisma";
+import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, Address, Customer } from "@prisma/client";
 
 export class AddressServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
-  async count<T extends Prisma.AddressFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.AddressFindManyArgs>
+  async count<T extends Prisma.AddressCountArgs>(
+    args: Prisma.SelectSubset<T, Prisma.AddressCountArgs>
   ): Promise<number> {
     return this.prisma.address.count(args);
   }
@@ -52,7 +52,7 @@ export class AddressServiceBase {
     args: Prisma.CustomerFindManyArgs
   ): Promise<Customer[]> {
     return this.prisma.address
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .customers(args);
