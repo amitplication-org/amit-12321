@@ -59,6 +59,12 @@ export class CustomerControllerBase {
               connect: data.address,
             }
           : undefined,
+
+        someThing: data.someThing
+          ? {
+              connect: data.someThing,
+            }
+          : undefined,
       },
       select: {
         address: {
@@ -68,11 +74,19 @@ export class CustomerControllerBase {
         },
 
         createdAt: true,
+        customerType: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
         phone: true,
+
+        someThing: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -102,11 +116,19 @@ export class CustomerControllerBase {
         },
 
         createdAt: true,
+        customerType: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
         phone: true,
+
+        someThing: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -137,11 +159,19 @@ export class CustomerControllerBase {
         },
 
         createdAt: true,
+        customerType: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
         phone: true,
+
+        someThing: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -180,6 +210,12 @@ export class CustomerControllerBase {
                 connect: data.address,
               }
             : undefined,
+
+          someThing: data.someThing
+            ? {
+                connect: data.someThing,
+              }
+            : undefined,
         },
         select: {
           address: {
@@ -189,11 +225,19 @@ export class CustomerControllerBase {
           },
 
           createdAt: true,
+          customerType: true,
           email: true,
           firstName: true,
           id: true,
           lastName: true,
           phone: true,
+
+          someThing: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -232,11 +276,19 @@ export class CustomerControllerBase {
           },
 
           createdAt: true,
+          customerType: true,
           email: true,
           firstName: true,
           id: true,
           lastName: true,
           phone: true,
+
+          someThing: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });

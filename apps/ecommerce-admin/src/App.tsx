@@ -25,6 +25,10 @@ import { ProductList } from "./product/ProductList";
 import { ProductCreate } from "./product/ProductCreate";
 import { ProductEdit } from "./product/ProductEdit";
 import { ProductShow } from "./product/ProductShow";
+import { SomeThingList } from "./someThing/SomeThingList";
+import { SomeThingCreate } from "./someThing/SomeThingCreate";
+import { SomeThingEdit } from "./someThing/SomeThingEdit";
+import { SomeThingShow } from "./someThing/SomeThingShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -44,7 +48,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"ecommerce"}
+        title={"ecommerce-1"}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}
@@ -85,6 +89,13 @@ const App = (): React.ReactElement => {
           edit={ProductEdit}
           create={ProductCreate}
           show={ProductShow}
+        />
+        <Resource
+          name="SomeThing"
+          list={SomeThingList}
+          edit={SomeThingEdit}
+          create={SomeThingCreate}
+          show={SomeThingShow}
         />
       </Admin>
     </div>

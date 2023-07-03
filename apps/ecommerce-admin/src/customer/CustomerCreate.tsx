@@ -13,6 +13,7 @@ import {
 
 import { AddressTitle } from "../address/AddressTitle";
 import { OrderTitle } from "../order/OrderTitle";
+import { SomeThingTitle } from "../someThing/SomeThingTitle";
 
 export const CustomerCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -21,6 +22,17 @@ export const CustomerCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="address.id" reference="Address" label="Address">
           <SelectInput optionText={AddressTitle} />
         </ReferenceInput>
+        <SelectInput
+          source="customerType"
+          label="customer-type"
+          choices={[
+            { label: "INDIVIDUAL", value: "Individual" },
+            { label: "COMPANY", value: "Company" },
+          ]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
         <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
@@ -33,6 +45,13 @@ export const CustomerCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={OrderTitle} />
         </ReferenceArrayInput>
         <TextInput label="Phone" source="phone" />
+        <ReferenceInput
+          source="someThing.id"
+          reference="SomeThing"
+          label="SomeThing"
+        >
+          <SelectInput optionText={SomeThingTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Create>
   );
