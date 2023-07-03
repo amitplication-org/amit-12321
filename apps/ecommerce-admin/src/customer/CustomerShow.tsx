@@ -14,7 +14,6 @@ import {
 import { CUSTOMER_TITLE_FIELD } from "./CustomerTitle";
 import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
 import { ADDRESS_TITLE_FIELD } from "../address/AddressTitle";
-import { SOMETHING_TITLE_FIELD } from "../someThing/SomeThingTitle";
 
 export const CustomerShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -29,17 +28,10 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
         <TextField label="ID" source="id" />
         <TextField label="Last Name" source="lastName" />
         <TextField label="Phone" source="phone" />
-        <ReferenceField
-          label="SomeThing"
-          source="something.id"
-          reference="SomeThing"
-        >
-          <TextField source={SOMETHING_TITLE_FIELD} />
-        </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Order"
-          target="CustomerId"
+          target="customerId"
           label="Orders"
         >
           <Datagrid rowClick="show">
