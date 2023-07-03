@@ -50,17 +50,6 @@ class CustomerOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  customerType?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   email?: SortOrder;
 
   @ApiProperty({
@@ -106,17 +95,6 @@ class CustomerOrderByInput {
     nullable: true,
   })
   phone?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  someThingId?: SortOrder;
 
   @ApiProperty({
     required: false,

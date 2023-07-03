@@ -12,13 +12,11 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { EnumCustomerCustomerType } from "./EnumCustomerCustomerType";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
-import { SomeThingWhereUniqueInput } from "../../someThing/base/SomeThingWhereUniqueInput";
 
 @InputType()
 class CustomerWhereInput {
@@ -33,17 +31,6 @@ class CustomerWhereInput {
     nullable: true,
   })
   address?: AddressWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumCustomerCustomerType,
-  })
-  @IsEnum(EnumCustomerCustomerType)
-  @IsOptional()
-  @Field(() => EnumCustomerCustomerType, {
-    nullable: true,
-  })
-  customerType?: "Individual" | "Company";
 
   @ApiProperty({
     required: false,
@@ -111,18 +98,6 @@ class CustomerWhereInput {
     nullable: true,
   })
   phone?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => SomeThingWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => SomeThingWhereUniqueInput)
-  @IsOptional()
-  @Field(() => SomeThingWhereUniqueInput, {
-    nullable: true,
-  })
-  someThing?: SomeThingWhereUniqueInput;
 }
 
 export { CustomerWhereInput as CustomerWhereInput };

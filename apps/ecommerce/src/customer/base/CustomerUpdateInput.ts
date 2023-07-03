@@ -12,11 +12,9 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum, IsString } from "class-validator";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { EnumCustomerCustomerType } from "./EnumCustomerCustomerType";
 import { OrderUpdateManyWithoutCustomersInput } from "./OrderUpdateManyWithoutCustomersInput";
-import { SomeThingWhereUniqueInput } from "../../someThing/base/SomeThingWhereUniqueInput";
 
 @InputType()
 class CustomerUpdateInput {
@@ -31,17 +29,6 @@ class CustomerUpdateInput {
     nullable: true,
   })
   address?: AddressWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumCustomerCustomerType,
-  })
-  @IsEnum(EnumCustomerCustomerType)
-  @IsOptional()
-  @Field(() => EnumCustomerCustomerType, {
-    nullable: true,
-  })
-  customerType?: "Individual" | "Company" | null;
 
   @ApiProperty({
     required: false,
@@ -98,18 +85,6 @@ class CustomerUpdateInput {
     nullable: true,
   })
   phone?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => SomeThingWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => SomeThingWhereUniqueInput)
-  @IsOptional()
-  @Field(() => SomeThingWhereUniqueInput, {
-    nullable: true,
-  })
-  someThing?: SomeThingWhereUniqueInput | null;
 }
 
 export { CustomerUpdateInput as CustomerUpdateInput };

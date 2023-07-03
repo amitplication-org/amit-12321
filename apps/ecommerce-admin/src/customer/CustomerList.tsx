@@ -9,7 +9,6 @@ import {
 } from "react-admin";
 import Pagination from "../Components/Pagination";
 import { ADDRESS_TITLE_FIELD } from "../address/AddressTitle";
-import { SOMETHING_TITLE_FIELD } from "../someThing/SomeThingTitle";
 
 export const CustomerList = (props: ListProps): React.ReactElement => {
   return (
@@ -25,19 +24,11 @@ export const CustomerList = (props: ListProps): React.ReactElement => {
           <TextField source={ADDRESS_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="createdAt" label="Created At" />
-        <TextField label="customer-type" source="customerType" />
         <TextField label="Email" source="email" />
         <TextField label="First Name" source="firstName" />
         <TextField label="ID" source="id" />
         <TextField label="Last Name" source="lastName" />
         <TextField label="Phone" source="phone" />
-        <ReferenceField
-          label="SomeThing"
-          source="something.id"
-          reference="SomeThing"
-        >
-          <TextField source={SOMETHING_TITLE_FIELD} />
-        </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
     </List>
