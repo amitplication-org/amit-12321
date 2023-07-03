@@ -13,8 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { IsOptional, IsEnum } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
+import { EnumUserUserType } from "./EnumUserUserType";
 
 @InputType()
 class UserWhereInput {
@@ -61,6 +62,17 @@ class UserWhereInput {
     nullable: true,
   })
   username?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @IsOptional()
+  @Field(() => EnumUserUserType, {
+    nullable: true,
+  })
+  userType?: "Individual" | "Company";
 }
 
 export { UserWhereInput as UserWhereInput };

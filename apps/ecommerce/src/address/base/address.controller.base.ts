@@ -232,11 +232,19 @@ export class AddressControllerBase {
         },
 
         createdAt: true,
+        customerType: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
         phone: true,
+
+        someThing: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });

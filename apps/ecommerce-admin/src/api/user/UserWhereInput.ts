@@ -6,4 +6,5 @@ export type UserWhereInput = {
   id?: StringFilter;
   lastName?: StringNullableFilter;
   username?: StringFilter;
+  userType?: "Individual" | "Company";
 };

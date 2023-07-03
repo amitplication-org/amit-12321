@@ -11,10 +11,11 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { IsString, IsOptional, IsEnum } from "class-validator";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { EnumUserUserType } from "./EnumUserUserType";
 
 @InputType()
 class UserUpdateInput {
@@ -71,6 +72,17 @@ class UserUpdateInput {
     nullable: true,
   })
   username?: string;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @IsOptional()
+  @Field(() => EnumUserUserType, {
+    nullable: true,
+  })
+  userType?: "Individual" | "Company" | null;
 }
 
 export { UserUpdateInput as UserUpdateInput };
